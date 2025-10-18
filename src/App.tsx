@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import HomePage from "./pages/home";
+import AboutPage from "./pages/about";
 import { Routes, Route } from "react-router";
 
 const API_URL = import.meta.env.VITE_API_URL;
 import type { FetchedCoin } from "../types";
+import Header from "./components/header";
+import NotFoundPage from "./pages/not-found";
 
 const App = () => {
   const [coins, setCoins] = useState<FetchedCoin[]>([]);
@@ -37,24 +40,29 @@ const App = () => {
   }, [limit]);
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <HomePage
-            coins={coins}
-            filter={filter}
-            setFilter={setFilter}
-            limit={limit}
-            setLimit={setLimit}
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            loading={loading}
-            error={error}
-          />
-        }
-      />
-    </Routes>
+    <>
+      <Header />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <HomePage
+              coins={coins}
+              filter={filter}
+              setFilter={setFilter}
+              limit={limit}
+              setLimit={setLimit}
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+              loading={loading}
+              error={error}
+            />
+          }
+        />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
   );
 };
 
