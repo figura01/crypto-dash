@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router";
 const API_URL = import.meta.env.VITE_COIN_API_URL;
 import type { CoinDetailProps } from "../../types";
 import Spinner from "../components/spinner";
+import CoinChart from "../components/coin-chart";
 
 const CoinDetailsPage = () => {
   const { id } = useParams();
@@ -13,7 +14,11 @@ const CoinDetailsPage = () => {
   useEffect(() => {
     const fetchCoin = async () => {
       try {
-        const res = await fetch(`${API_URL}/${id}`);
+        const res = await fetch(`${API_URL}/${id}`, {
+          headers: {
+            Accept: "application/json",
+          },
+        });
         if (!res.ok) throw new Error("Failed to fetch data");
         const data = await res.json();
         console.log(data);
@@ -79,6 +84,8 @@ const CoinDetailsPage = () => {
               {coin.market_data?.total_supply?.toLocaleString() || "N/A"}{" "}
             </h4>
           </div>
+
+          <CoinChart coinId={coin.id} />
 
           <div className="coin-details-links">
             {coin.links.homepage[0] && (
