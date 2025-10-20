@@ -57,7 +57,7 @@ const HomePage = ({
 
   return (
     <div>
-      <h1>Crypto dash</h1>
+      <h1>🚀 Crypto dash</h1>
       {loading && <Spinner color={"white"} />}
       {error && <div className="error">{error.message}</div>}
 
