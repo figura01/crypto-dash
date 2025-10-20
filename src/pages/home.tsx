@@ -4,6 +4,7 @@ import SortSelector from "../components/sort-selector";
 import CoinCard from "../components/coin-card";
 
 import type { FetchedCoin } from "../../types";
+import Spinner from "../components/spinner";
 
 const HomePage = ({
   coins,
@@ -57,7 +58,7 @@ const HomePage = ({
   return (
     <div>
       <h1>Crypto dash</h1>
-      {loading && <p>Loading...</p>}
+      {loading && <Spinner color={"white"} />}
       {error && <div className="error">{error.message}</div>}
 
       <div className="top-controls">
